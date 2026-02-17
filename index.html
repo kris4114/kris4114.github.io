@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ByteVille Academy</title>
+
+<!-- Pixel Font -->
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    background: #1e1e2f;
+    font-family: 'Press Start 2P', cursive;
+    color: white;
+}
+
+header {
+    background: #2c2c44;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 4px solid #00ffcc;
+}
+
+h1 {
+    font-size: 18px;
+    margin: 0;
+}
+
+.container {
+    padding: 20px;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: #2a2a3d;
+    padding: 15px;
+    border: 3px solid #00ffcc;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    background: #34345a;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px;
+    font-family: 'Press Start 2P';
+    background: #00ffcc;
+    border: none;
+    cursor: pointer;
+}
+
+.xp-bar {
+    margin-top: 20px;
+    background: #444;
+    height: 25px;
+    border: 2px solid white;
+}
+
+.xp-fill {
+    height: 100%;
+    background: #00ffcc;
+    width: 0%;
+    transition: width 0.3s;
+}
+
+.inventory {
+    margin-top: 30px;
+}
+
+.inventory-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 60px);
+    gap: 10px;
+}
+
+.slot {
+    width: 60px;
+    height: 60px;
+    background: #2a2a3d;
+    border: 2px solid #00ffcc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>BYTEVILLE ACADEMY</h1>
+</header>
+
+<div class="container">
+
+    <h2>Lessons</h2>
+    <div class="card-grid">
+        <div class="card" onclick="completeLesson('GPIO Basics')">
+            GPIO Basics
+            <button>Complete</button>
+        </div>
+        <div class="card" onclick="completeLesson('LED Circuits')">
+            LED Circuits
+            <button>Complete</button>
+        </div>
+        <div class="card" onclick="completeLesson('Python Intro')">
+            Python Intro
+            <button>Complete</button>
+        </div>
+    </div>
+
+    <h2>XP</h2>
+    <div class="xp-bar">
+        <div class="xp-fill" id="xpFill"></div>
+    </div>
+
+    <div class="inventory">
+        <h2>Inventory</h2>
+        <div class="inventory-grid">
+            <div class="slot">🔧</div>
+            <div class="slot">💡</div>
+            <div class="slot"></div>
+            <div class="slot"></div>
+            <div class="slot"></div>
+            <div class="slot"></div>
+            <div class="slot"></div>
+            <div class="slot"></div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+let xp = localStorage.getItem("xp") ? parseInt(localStorage.getItem("xp")) : 0;
+updateXP();
+
+function completeLesson(name) {
+    alert("Completed: " + name + "!");
+    xp += 20;
+    if (xp > 100) xp = 100;
+    localStorage.setItem("xp", xp);
+    updateXP();
+}
+
+function updateXP() {
+    document.getElementById("xpFill").style.width = xp + "%";
+}
+</script>
+
+</body>
+</html>
